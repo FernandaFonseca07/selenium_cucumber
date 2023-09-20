@@ -1,5 +1,6 @@
 package steps;
 
+import io.cucumber.java.After;
 import io.cucumber.java.Before;
 import io.cucumber.java.pt.Dado;
 import io.cucumber.java.pt.E;
@@ -26,7 +27,6 @@ public class LoginStep {
         cadastroPage = new CadastroPage(driver);
         loginPage = new LoginPage(driver);
     }
-
 
     @Dado("que esteja na pagina de login: {string}")
     public void queEstejaNaPaginaDeLogin(String url) {
@@ -57,9 +57,14 @@ public class LoginStep {
     }
 
     @Entao("valido que a pagina de boas vindas foi carregado")
-    public void validoQueAPaginaDeBoasVindasFoiCarregado() {
+    public void validoQueAPaginaDeBoasVindasFoiCarregado() throws InterruptedException {
+        Thread.sleep(2000);
         Assert.assertTrue(driver.getCurrentUrl().contains("/home"));
     }
-
+    @After
+    public void after () throws InterruptedException {
+        Thread.sleep(5000);
+        driver.quit();
+    }
 
 }
