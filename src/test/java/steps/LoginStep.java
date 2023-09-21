@@ -12,6 +12,8 @@ import org.openqa.selenium.chrome.ChromeDriver;
 import pages.CadastroPage;
 import pages.LoginPage;
 
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 public class LoginStep {
@@ -40,6 +42,22 @@ public class LoginStep {
         cadastroPage.preencherNome("Fe Fonseca");
         cadastroPage.preencherSenha("teste");
         cadastroPage.preencherConfirmacaoSenha("teste");
+        cadastroPage.clicarCriarComSaldo();
+        cadastroPage.clicarCadastrar();
+        cadastroPage.fecharCadastroComSucesso();
+    }
+
+    @Dado("preencho cadastro com os dados")
+    public void possuoCadastroDataTable(List<Map<String, String>> dataTable) throws InterruptedException {
+        String email = dataTable.get(0).get("Email");
+        String nome = dataTable.get(0).get("Nome");
+        String senha = dataTable.get(0).get("Senha");
+        String confirmacao = dataTable.get(0).get("Confirmacao");
+        cadastroPage.clicarRegistrar();
+        cadastroPage.preencherEmail(email);
+        cadastroPage.preencherNome(nome);
+        cadastroPage.preencherSenha(senha);
+        cadastroPage.preencherConfirmacaoSenha(confirmacao);
         cadastroPage.clicarCriarComSaldo();
         cadastroPage.clicarCadastrar();
         cadastroPage.fecharCadastroComSucesso();
